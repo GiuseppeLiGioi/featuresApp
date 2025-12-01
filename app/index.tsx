@@ -1,9 +1,4 @@
-import { Text, View } from "react-native";
-
+import PlaceList from "../components/my/placesList";
 export default function HomePage() {
-  return (
-    <View>
-      <Text>Sono HomePage</Text>
-    </View>
-  );
+  return <PlaceList places={places} />;
 }

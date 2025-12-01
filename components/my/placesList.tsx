@@ -1,9 +1,35 @@
-import { Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 
-export default function placeList() {
+import PlaceItem from "./placeItem";
+
+export default function PlaceList({ places }) {
+  if (!places || places.length < 0) {
+    return (
+      <View style={styles.fallBackContainer}>
+        <Text style={styles.fallBackText}>
+          Ancora non non è presente nessuna card. Creane una!
+        </Text>
+      </View>
+    );
+  }
   return (
-    <View>
-      <Text>Sono placeList</Text>
-    </View>
+    <FlatList
+      data={places}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => <PlaceItem place={item} />}
+    />
   );
 }
+
+const styles = StyleSheet.create({
+  fallBackContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  fallBackText: {
+    fontSize: 12,
+    textAlign: "center",
+  },
+});
