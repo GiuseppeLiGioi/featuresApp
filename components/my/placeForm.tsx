@@ -1,9 +1,9 @@
 import { Text, View } from "react-native";
 
-export default function placeForm() {
+export default function PlaceForm() {
   return (
     <View>
-      <Text>Sono placeForm</Text>
+      <Text>Sono PlaceForm</Text>
     </View>
   );
 }

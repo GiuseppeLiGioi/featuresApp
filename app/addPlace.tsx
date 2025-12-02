@@ -1,9 +1,5 @@
-import { Text, View } from "react-native";
+import PlaceForm from "@/components/my/placeForm";
 
 export default function addPlace() {
-  return (
-    <View>
-      <Text>Sono addPlace</Text>
-    </View>
-  );
+  return <PlaceForm />;
 }
