@@ -16,7 +16,7 @@ export default function IconButton({
   return (
     <Pressable
       onPress={onPress}
-      style={(pressed) => [styles.button, pressed && styles.pressed]}
+      style={({ pressed }) => [styles.button, pressed && styles.pressed]}
     >
       <Ionicons icon={icon} size={size} color={color} />
     </Pressable>
