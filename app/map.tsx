@@ -1,7 +1,7 @@
 import IconButton from "@/components/my/IconButton";
 import { useNavigation } from "@react-navigation/native";
 import { useRouter } from "expo-router";
-import { useLayoutEffect, useState } from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 import { Alert, StyleSheet } from "react-native";
 import MapView, { MapPressEvent, Marker } from "react-native-maps";
 export default function Map() {
@@ -29,7 +29,7 @@ export default function Map() {
     setSelectedLocation({ lat: lat, lng: lng });
   }
 
-  function savePickedLocationHandler() {
+  const savePickedLocationHandler = useCallback(() => {
     if (!selectedLocation) {
       Alert.alert(
         "No location picked",
@@ -41,7 +41,7 @@ export default function Map() {
     router.push(
       `/addPlace?pickedLat=${selectedLocation.lat}&pickedLng=${selectedLocation.lng}`
     );
-  }
+  }, [router, selectedLocation]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -54,7 +54,7 @@ export default function Map() {
         />
       ),
     });
-  }, []);
+  }, [navigation, savePickedLocationHandler]);
   return (
     <MapView
       style={styles.map}
