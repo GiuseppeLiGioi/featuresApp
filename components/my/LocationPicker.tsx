@@ -5,7 +5,7 @@ import {
   useForegroundPermissions,
 } from "expo-location";
 import { useState } from "react";
-import { Alert, Image, StyleSheet, View } from "react-native";
+import { Alert, Image, StyleSheet, Text, View } from "react-native";
 import { getMapPreview } from "../../util/location";
 import OutlinedButton from "./OutlinedButton";
 
@@ -56,16 +56,23 @@ export default function LocationPicker() {
     });
   }
 
+  let locationPreview = <Text>No location picked yet!</Text>;
+
+  if (pickedLocation) {
+    locationPreview = (
+      <Image
+        style={styles.image}
+        source={{
+          uri: getMapPreview(pickedLocation?.lat, pickedLocation?.lng),
+        }}
+      />
+    );
+  }
+
   function pickOnMapHandler() {}
   return (
     <View>
-      <View style={styles.mapPreview}>
-        <Image
-          source={{
-            uri: getMapPreview(pickedLocation?.lat, pickedLocation?.lng),
-          }}
-        />
-      </View>
+      <View style={styles.mapPreview}>{locationPreview}</View>
       <View style={styles.actions}>
         <OutlinedButton icon="location" onPress={getLocationHandler}>
           Locate User
@@ -92,5 +99,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
+  },
+
+  image: {
+    width: "100%",
+    height: "100%",
   },
 });
