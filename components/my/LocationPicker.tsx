@@ -4,6 +4,7 @@ import {
   PermissionStatus,
   useForegroundPermissions,
 } from "expo-location";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Alert, Image, StyleSheet, Text, View } from "react-native";
 import { getMapPreview } from "../../util/location";
@@ -15,6 +16,7 @@ type UserLocation = {
 };
 
 export default function LocationPicker() {
+  const router = useRouter();
   const [pickedLocation, setPickedLocation] = useState<UserLocation | null>(
     null
   );
@@ -69,7 +71,9 @@ export default function LocationPicker() {
     );
   }
 
-  function pickOnMapHandler() {}
+  function pickOnMapHandler() {
+    router.navigate("/map");
+  }
   return (
     <View>
       <View style={styles.mapPreview}>{locationPreview}</View>
@@ -94,6 +98,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.primary100,
     borderRadius: 4,
+    overflow: "hidden",
   },
   actions: {
     flexDirection: "row",
