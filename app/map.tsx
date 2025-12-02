@@ -1,7 +1,12 @@
-import { useState } from "react";
-import { StyleSheet } from "react-native";
+import IconButton from "@/components/my/IconButton";
+import { useNavigation } from "@react-navigation/native";
+import { useRouter } from "expo-router";
+import { useLayoutEffect, useState } from "react";
+import { Alert, StyleSheet } from "react-native";
 import MapView, { MapPressEvent, Marker } from "react-native-maps";
 export default function Map() {
+  const router = useRouter();
+  const navigation = useNavigation();
   type Location = {
     lat: number;
     lng: number;
@@ -23,6 +28,33 @@ export default function Map() {
     const lng = event.nativeEvent.coordinate.longitude;
     setSelectedLocation({ lat: lat, lng: lng });
   }
+
+  function savePickedLocationHandler() {
+    if (!selectedLocation) {
+      Alert.alert(
+        "No location picked",
+        "You have to pick a location (by tapping on the map) frist!"
+      );
+      return;
+    }
+
+    router.push(
+      `/addPlace?pickedLat=${selectedLocation.lat}&pickedLng=${selectedLocation.lng}`
+    );
+  }
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <IconButton
+          icon="save"
+          color="pink"
+          size={24}
+          onPress={savePickedLocationHandler}
+        />
+      ),
+    });
+  }, []);
   return (
     <MapView
       style={styles.map}
