@@ -3,7 +3,15 @@ import { useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import ImagePicker from "./ImagePicker";
 import LocationPicker from "./LocationPicker";
-export default function PlaceForm() {
+
+type UserLocation = {
+  lat: number;
+  lng: number;
+};
+type PlaceFormProps = {
+  initialLocation?: UserLocation | null;
+};
+export default function PlaceForm({ initialLocation }: PlaceFormProps) {
   const [enteredTitle, setEnteredTitle] = useState<string>("");
 
   function changeTitleHandler(enteredText: string) {

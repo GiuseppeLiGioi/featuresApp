@@ -5,7 +5,7 @@ import {
   useForegroundPermissions,
 } from "expo-location";
 import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert, Image, StyleSheet, Text, View } from "react-native";
 import { getMapPreview } from "../../util/location";
 import OutlinedButton from "./OutlinedButton";
@@ -15,13 +15,26 @@ type UserLocation = {
   lng: number;
 };
 
-export default function LocationPicker() {
+type LocationPickerProps = {
+  initialLocation?: UserLocation | null;
+};
+
+export default function LocationPicker({
+  initialLocation,
+}: LocationPickerProps) {
   const router = useRouter();
   const [pickedLocation, setPickedLocation] = useState<UserLocation | null>(
     null
   );
   const [locationPermissionInformation, requestPermession] =
     useForegroundPermissions();
+
+  useEffect(() => {
+    if (initialLocation) {
+      setPickedLocation(initialLocation);
+    }
+  }, [initialLocation]);
+
   async function verifyPermissions() {
     //piccolo check perche può essere null al primo render.
     if (!locationPermissionInformation) {
