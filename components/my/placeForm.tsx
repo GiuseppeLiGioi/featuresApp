@@ -2,6 +2,7 @@ import { Colors } from "@/constants/theme";
 import { useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import ImagePicker from "./ImagePicker";
+import LocationPicker from "./LocationPicker";
 export default function PlaceForm() {
   const [enteredTitle, setEnteredTitle] = useState<string>("");
 
@@ -21,6 +22,7 @@ export default function PlaceForm() {
         />
       </View>
       <ImagePicker />
+      <LocationPicker />
     </ScrollView>
   );
 }
