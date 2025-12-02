@@ -5,7 +5,7 @@ import { Pressable, StyleSheet, Text } from "react-native";
 type OutlinedButtonProps = {
   icon: string;
   children: string;
-  onPress: () => Promise<void>;
+  onPress: () => void | Promise<void>;
 };
 export default function OutlinedButton({
   onPress,
