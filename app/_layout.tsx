@@ -1,9 +1,16 @@
 import IconButton from "@/components/my/IconButton";
+import { Colors } from "@/constants/theme";
 import { Stack, useRouter } from "expo-router";
 export default function RootLayout() {
   const router = useRouter();
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        headerStyle: { backgroundColor: Colors.primary500 },
+        headerTintColor: Colors.gray700,
+        contentStyle: { backgroundColor: Colors.gray700 },
+      }}
+    >
       <Stack.Screen
         name="index"
         options={{

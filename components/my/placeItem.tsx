@@ -1,5 +1,5 @@
+import { Colors } from "@/constants/theme";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-
 export default function placeItem({ place, onSelect }) {
   return (
     <Pressable onPress={onSelect}>
@@ -12,4 +12,16 @@ export default function placeItem({ place, onSelect }) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  fallBackContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignContent: "center",
+  },
+
+  fallBackText: {
+    fontSize: 16,
+    color: Colors.primary200,
+    textAlign: "center",
+  },
+});
