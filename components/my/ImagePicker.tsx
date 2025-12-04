@@ -7,7 +7,11 @@ import {
 import { useState } from "react";
 import { Alert, Image, StyleSheet, Text, View } from "react-native";
 import OutlinedButton from "./OutlinedButton";
-export default function ImagePicker() {
+
+type ImagePickerProps = {
+  onPickImage: (uri: string) => void;
+};
+export default function ImagePicker({ onPickImage }: ImagePickerProps) {
   const [pickedImage, setPickedImage] = useState<string | null>(null);
   const [cameraPermissionInformation, requestPermission] =
     useCameraPermissions();
@@ -46,6 +50,7 @@ export default function ImagePicker() {
     });
     if (!image.canceled) {
       setPickedImage(image.assets[0].uri);
+      onPickImage(image.assets[0].uri);
     }
   }
   let imagePreview = <Text>No image picked yet!</Text>;

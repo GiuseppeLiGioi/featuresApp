@@ -17,10 +17,12 @@ type UserLocation = {
 
 type LocationPickerProps = {
   initialLocation?: UserLocation | null;
+  onPickLocation: (loc: UserLocation | null) => void;
 };
 
 export default function LocationPicker({
   initialLocation,
+  onPickLocation,
 }: LocationPickerProps) {
   const router = useRouter();
   const [pickedLocation, setPickedLocation] = useState<UserLocation | null>(
@@ -69,6 +71,7 @@ export default function LocationPicker({
       lat: location.coords.latitude,
       lng: location.coords.longitude,
     });
+    onPickLocation(pickedLocation);
   }
 
   let locationPreview = <Text>No location picked yet!</Text>;
